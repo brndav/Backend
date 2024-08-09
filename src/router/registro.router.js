@@ -27,7 +27,7 @@ router.get('/consulta/:id_registros',async(req,res)=>{
 
 router.post('/crear', async (req, res) => {
     const datos = req.body;
-    // await Registros.sync();
+    await Registros.sync();
     const crear = await Registros.create({
 
         id_registros: datos.id_registros,
@@ -44,16 +44,20 @@ router.post('/crear', async (req, res) => {
         
     })
 
+
     res.status(201).json({
         ok:true,
         status:201,
+    })
+    res.status(200).json({
+        ok:true,
+        status:200,
         message:"Registro creado",
         body:crear
-        
-
     })
     
 })
+
 
 router.put ('/actualizar/:id_registros', async(req,res)=>{
     const id= req.params.id_registros;
@@ -98,6 +102,7 @@ router.delete('/eliminar/:id_registros', async (req, res) => {
         body: borrar
     });
 });
+
 
 
 

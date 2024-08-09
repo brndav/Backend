@@ -69,7 +69,11 @@ router.put("/actualizar/:idusuario", async (req, res) => {
       },
       {
         where: {
+
         id: id,
+
+          idusuario: id,
+
         },
       }
     );
@@ -90,7 +94,11 @@ router.delete("/eliminar/:idusuario", async (req, res) => {
   try {
     const borrar = await Usuarios.destroy({
       where: {
+
         id: id,
+
+        idusuario: id,
+
       },
     });
     res.status(204).json({
@@ -118,6 +126,7 @@ router.post('/login', async (req, res) => {
                 msg: `No existe un usuario con el correo ${correo} en la base de datos`
             });
         }
+
         // Validamos contraseña
         const contrasenaValida = await bcrypt.compare(contrasena, usuario.contrasena);
 

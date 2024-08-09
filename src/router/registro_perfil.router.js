@@ -110,6 +110,7 @@ router.post('/registro_perfil', async (req, res) => {
     }
 });
 
+
 router.post('/registro_perfil', async (req, res) => {
     const datos = req.body;
     try {
@@ -137,5 +138,7 @@ router.post('/registro_perfil', async (req, res) => {
         });
     }
 });
+
+
 
 module.exports = router;

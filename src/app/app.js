@@ -33,16 +33,15 @@ const autorrouter =require ("../router/autores.router")
 require('dotenv').config();
 
 
-
 const app = express();
 app.use(cors())
-
-  
-
 app.use (morgan("dev")) 
 app.use(express.json())
 
 app.use(express.urlencoded({ extended: true }));
+app.use (morgan("dev")) 
+app.use(express.json())
+
 app.get("/",(req,res)=>{
     res.send('Iniciando bd');  
 }); 
@@ -74,6 +73,3 @@ app.use ("/registroperf",registroperfrouter);
 
 
 module.exports= app;
-
-
-

@@ -45,4 +45,8 @@ async function testConnection(){
         console.error("Conexión a la BD fallida", error)
     }
 }
+
  testConnection();
+
+
+

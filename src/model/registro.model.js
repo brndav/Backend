@@ -1,4 +1,5 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
+
 const sequelize = new Sequelize("congreso_bd","root","admin",{
     host:"localhost",dialect:"mysql",port:"3306"});
 
@@ -65,5 +66,7 @@ async function testConnection(){
         console.error("Conexión a la BD fallida", error)
     }
 }
+
  testConnection();
  
+
