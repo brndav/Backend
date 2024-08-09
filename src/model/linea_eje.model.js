@@ -2,33 +2,46 @@ const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = new Sequelize("congreso_bd","root","admin",{
     host:"localhost",dialect:"mysql",port:"3306"});
 
-class programasr extends Model{}
+class linea_eje extends Model{}
 
-programasr.init({
-    idprograma_registro:{
+linea_eje.init({
+    id_linea_eje:{
     type: DataTypes.INTEGER,
    // defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
     allowNull:false
     },
-    id_horario_dia:{
+    id_eje:{
         type:DataTypes.INTEGER
     },
-    id_registro:{
+    id_linea:{
         type:DataTypes.INTEGER
-    }
-
-  
+    },
+   
 },{ 
    sequelize,
-   modelName: "programa_registro",  
+   modelName: "linea_eje",  
    timestamps: false, 
    freezeTableName: true,
    //createdAt: "createdAt",
    //updatedAt: "updatedAt"
-}
-);
-module.exports =programasr;
+});
+
+linea_eje.belongsTo(require('../model/linea.model'), {
+
+    foreignKey: 'id_linea',
+    onDelete: 'CASCADE'
+});
+linea_eje.belongsTo(require('../model/ejes.model'), {
+
+    foreignKey: 'id_eje',
+  
+    attributes: ['descripcion_eje']
+  
+  });
+
+
+module.exports =linea_eje;
 
 
 

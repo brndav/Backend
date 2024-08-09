@@ -8,24 +8,15 @@ const app = express();
 
 router.get('/consulta',async(req,res)=>{
     const consulta = await Actividades.findAll()
-    res.status(200).json({
-        ok:true,
-        status:200,
-        body:consulta
-    })
+    res.json(consulta)
 })
 
-router.get('/consulta/:id_actividad',async(req,res)=>{
-    const id = req.params.id_actividad;
-    const consulta = await Actividades.findOne({
-        where: {id_actividad:id}
-    })
-    res.status(200).json({
-        ok:true,
-        status:200,
-        body:consulta
-    })
-})
+router.get('/filtrar',async(req,res)=>{
+    const actividad = await Actividades.findAll({
+        attributes: ['id_actividad', 'opciones'] // solo necesitamos el ID y el nombre
+      });
+      res.json(actividad);
+    });
 
 router.post('/crear', async (req, res) => {
     const datos = req.body;

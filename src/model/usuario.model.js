@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
-const sequelize = new Sequelize("congreso_app","tese","1234",{
-    host:"45.79.198.62",dialect:"mysql",port:"3306"});
+const sequelize = new Sequelize("congreso_bd","root","admin",{
+    host:"localhost",dialect:"mysql",port:"3306"});
 
 class usuarios extends Model{}
 
@@ -27,7 +27,8 @@ usuarios.init({
         type:DataTypes.STRING
     },
     correo:{
-        type:DataTypes.STRING
+        type:DataTypes.STRING,
+        unique: true
     },
     contrasena:{
         type:DataTypes.STRING,

@@ -1,19 +1,22 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
-const sequelize = new Sequelize("congreso_app","tese","1234",{
-    host:"45.79.198.62",dialect:"mysql",port:"3306"});
+const sequelize = new Sequelize("congreso_bd","root","admin",{
+    host:"localhost",dialect:"mysql",port:"3306"});
 
 class perfiles extends Model{}
 
 perfiles.init({
     id_perfil:{
     type: DataTypes.INTEGER,
-   // defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
     allowNull:false
     },
     perfiles:{
         type:DataTypes.STRING
-    }
+    },
+    estatus_perfil: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
   
 },{ 
    sequelize,

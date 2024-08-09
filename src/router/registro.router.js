@@ -4,8 +4,6 @@ const express = require('express');
 const app = express();
 
 
-
-
 router.get('/consulta',async(req,res)=>{
     const consulta = await Registros.findAll()
     res.status(200).json({
@@ -29,22 +27,32 @@ router.get('/consulta/:id_registros',async(req,res)=>{
 
 router.post('/crear', async (req, res) => {
     const datos = req.body;
-    await Registros.sync();
+    // await Registros.sync();
     const crear = await Registros.create({
 
         id_registros: datos.id_registros,
+        titulo: datos.titulo,
+        resumen: datos.resumen,
+        abstract: datos.abstract,
+        resena_curricular: datos.resena_curricular,
+        foto: datos.foto,
+        idusuario: datos.id_usuario,
         id_actividad_cat: datos.id_actividad_cat,
-        nom_pres: datos.nom_pres,
-        descripcion: datos.descripcion,
-        abstract: datos.abstract
+        id_linea_eje: datos.id_linea_eje,
+        id_forma: datos.id_forma,
+       id_modalidad: datos.id_modalidad
+        
     })
 
-    res.status(200).json({
+    res.status(201).json({
         ok:true,
-        status:200,
+        status:201,
         message:"Registro creado",
         body:crear
+        
+
     })
+    
 })
 
 router.put ('/actualizar/:id_registros', async(req,res)=>{
@@ -53,10 +61,17 @@ router.put ('/actualizar/:id_registros', async(req,res)=>{
     const update = await Registros.update({
         
         id_registros: datos.id_registros,
+        titulo: datos.titulo,
+        resumen: datos.resumen,
+        abstract: datos.abstract,
+        resena_curricular: datos.resena_curricular,
+        foto: datos.foto,
+        idusuario: datos.id_usuario,
         id_actividad_cat: datos.id_actividad_cat,
-        nom_pres: datos.nom_pres,
-        descripcion: datos.descripcion,
-        abstract: datos.abstract
+        id_linea_eje: datos.id_linea_eje,
+       id_forma: datos.id_forma,
+       id_modalidad: datos.id_modalidad
+
     },
     {
         where: {
@@ -83,6 +98,7 @@ router.delete('/eliminar/:id_registros', async (req, res) => {
         body: borrar
     });
 });
+
 
 
 module.exports = router;

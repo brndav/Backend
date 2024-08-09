@@ -33,10 +33,8 @@ router.post('/crear', async (req, res) => {
     const crear = await Usuariosp.create({
 
         id_usuario_perfil: datos.id_usuario_perfil,
-        id_usuario: datos.id_usuario,
-        id_perfil: datos.id_perfil,
-        id_registro: datos.id_registro,
-        foto: datos.foto
+        idusuario: datos.idusuario,
+        id_perfil: datos.id_perfil
     })
 
     res.status(200).json({
@@ -53,10 +51,8 @@ router.put ('/actualizar/:id_usuario_perfil', async(req,res)=>{
     const update = await Usuariosp.update({
         
         id_usuario_perfil: datos.id_usuario_perfil,
-        id_usuario: datos.id_usuario,
+        idusuario: datos.idusuario,
         id_perfil: datos.id_perfil,
-        id_registro: datos.id_registro,
-        foto: datos.foto
     },
     {
         where: {
@@ -84,5 +80,34 @@ router.delete('/eliminar/:id_usuario_perfil', async (req, res) => {
     });
 });
 
+
+
+router.post('/usuario_perfil', async (req, res) => {
+    const datos = req.body;
+    try {
+        // Sincroniza el modelo con la base de datos si es necesario
+        await Usuariosp.sync();
+        // Crea una nueva asociación en la base de datos
+        const crear = await Usuariosp.create({
+            idusuario: datos.idusuario,
+            id_perfil: datos.id_perfil
+        });
+        
+        res.status(201).json({
+            ok: true,
+            status: 201,
+            message: "Perfil vinculado exitosamente",
+            body: crear
+        });
+    } catch (error) {
+        console.error('Error creando asociación:', error);
+        res.status(500).json({
+            ok: false,
+            status: 500,
+            message: 'Error creando asociación',
+            error: error.message
+        });
+    }
+});
 
 module.exports = router;

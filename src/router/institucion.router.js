@@ -27,7 +27,7 @@ router.get('/consulta',async(req,res)=>{
 //     res.json(consulta)
    
 //     })
-router.get('/consulta/nom', async (req, res) => {
+router.get('/consulta/:nom', async (req, res) => {
     const instituciones = await Instituciones.findAll({
       attributes: ['id_institucion', 'nombreinst'] // solo necesitamos el ID y el nombre
     });
@@ -43,6 +43,7 @@ router.post('/crear', async (req, res) => {
         nombreinst: datos.nombreinst,
         logo: datos.logo,
         link: datos.link,
+        
         
         
     })

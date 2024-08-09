@@ -14,15 +14,39 @@ const horarouter= require ("../router/horario.router")
 const hordirouter= require ("../router/horadia.router")
 const evenrouter= require ("../router/evento.router")
 const evarouter= require ("../router/evaluador.router")
-const caterobot= require ("../router/categoriarobot.router")
+const linearouter= require ("../router/linea.router")
+const ejerouter= require ("../router/ejes.router")
+const linejerouter= require ("../router/linea_eje.router")
+const formaprouter= require ("../router/forma_presentacion")
+const modexporouter = require ("../router/mod_expo")
+const pagosrouter = require ("../router/pagos.router")
+const asisrouter= require ("../router/asistencia.router")
+const membrouter= require ("../router/membresia.router")
+const registroperfrouter =require ("../router/registro_perfil.router")
+const autorrouter =require ("../router/autores.router")
+
+
+
+
+
+
+require('dotenv').config();
+
+
 
 const app = express();
 app.use(cors())
+
+  
+
 app.use (morgan("dev")) 
+app.use(express.json())
+
+app.use(express.urlencoded({ extended: true }));
 app.get("/",(req,res)=>{
     res.send('Iniciando bd');  
 }); 
-app.use(express.json())
+
 app.use ("/insti",instirouter); 
 app.use ("/regis",regisrouter);
 app.use ("/api",usuarouter);
@@ -36,7 +60,20 @@ app.use ("/hora",horarouter);
 app.use ("/hd",hordirouter);
 app.use ("/even",evenrouter);
 app.use ("/eva",evarouter);
-app.use ("/robot",caterobot);
+app.use ("/linea",linearouter);
+app.use ("/eje",ejerouter);
+app.use ("/lineje",linejerouter);
+app.use ("/formap",formaprouter);
+app.use ("/modexp",modexporouter);
+app.use ("/pago",pagosrouter);
+app.use ("/asist",asisrouter);
+app.use ("/membresia",membrouter);
+app.use ("/autor",autorrouter);
+app.use ("/registroperf",registroperfrouter);
+
+
 
 module.exports= app;
+
+
 

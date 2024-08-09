@@ -2,33 +2,34 @@ const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = new Sequelize("congreso_bd","root","admin",{
     host:"localhost",dialect:"mysql",port:"3306"});
 
-class programasr extends Model{}
+class formapres extends Model{}
 
-programasr.init({
-    idprograma_registro:{
+formapres.init({
+
+    id_forma:{
     type: DataTypes.INTEGER,
    // defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
-    allowNull:false
+    allowNull:false,
+    autoIncrement:true
     },
-    id_horario_dia:{
-        type:DataTypes.INTEGER
-    },
-    id_registro:{
-        type:DataTypes.INTEGER
-    }
 
+    descripcion:{
+        type:DataTypes.STRING
+    },
+  
+   
   
 },{ 
    sequelize,
-   modelName: "programa_registro",  
+   modelName: "forma_presentacion",  
    timestamps: false, 
    freezeTableName: true,
    //createdAt: "createdAt",
    //updatedAt: "updatedAt"
 }
 );
-module.exports =programasr;
+module.exports =formapres;
 
 
 
