@@ -1,5 +1,5 @@
 const router = require ("express").Router();
-const Lineas = require ( "../model/linea.model");
+const Lineas = require ( "../model/linea");
 const express = require('express');
 const app = express();
 
@@ -15,6 +15,15 @@ router.get('/consulta', async (req, res) => {
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
+
+
+router.get('/consulta/descrip',async(req,res)=>{
+    const consulta = await Lineas.findAll({
+        attributes:['id_linea','descripcion_linea']
+    });
+    res.json(consulta)
+    });
+
 
 router.post('/crear', async (req, res) => {
     const datos = req.body;
@@ -50,12 +59,6 @@ router.post('/crear', async (req, res) => {
 });
 
 
-router.get('/consulta/descrip',async(req,res)=>{
-    const consulta = await Lineas.findAll({
-        attributes:['id_linea','descripcion_linea']
-    });
-    res.json(consulta)
-    });
 
 
 

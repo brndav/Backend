@@ -1,5 +1,5 @@
 const router = require ("express").Router();
-const perfiles = require ( "../model/perfil.model");
+const perfiles = require ( "../model/perfil");
 const express = require('express');
 const app = express();
 
@@ -13,6 +13,31 @@ router.get('/consulta', async (req, res) => {
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
+router.get('/consulta/:nom', async (req, res) => {
+    const perfil = await perfiles.findAll({
+      attributes: ['id_perfil', 'perfiles', 'estatus_perfil'] // solo necesitamos el ID y el nombre
+    });
+    res.json(perfil);
+  });
+
+///////////consulta registros ponencia
+  router.get('/con/:id', async (req, res) => {
+    const { id } = req.params;  // Obtener el id_perfil desde los parámetros
+    const perfil = await perfiles.findOne({
+      where: {
+        id_perfil: id  // Buscar el perfil por su id_perfil
+      },
+      attributes: ['id_perfil', 'perfiles', 'estatus_perfil']  // Solo obtenemos id_perfil, perfiles y estatus_perfil
+    });
+  
+    if (perfil) {
+      res.json(perfil);  // Devuelve el perfil encontrado
+    } else {
+      res.status(404).json({ message: 'Perfil no encontrado' });
+    }
+  });
+  
+
 
 router.post('/crear', async (req, res) => {
     const datos = req.body;

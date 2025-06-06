@@ -1,8 +1,8 @@
 const router = require ("express").Router();
-const Ejes = require ( "../model/ejes.model");
+const Ejes = require ( "../model/ejes");
 const express = require('express');
-const Linea_eje = require("../model/linea_eje.model");
-const linea_eje = require("../model/linea_eje.model");
+const Linea_eje = require("../model/linea_eje");
+const linea_eje = require("../model/linea_eje");
 
 const app = express();
 
@@ -12,6 +12,7 @@ router.get('/consulta',async(req,res)=>{
     res.json(consulta)
       
     })
+
     router.get('/consulta/ejes',async(req,res)=>{
         const id = req.body.id_linea
         const consulta = await linea_eje.findAll({
@@ -25,10 +26,7 @@ router.get('/consulta/descrip',async(req,res)=>{
     const consulta = await Ejes.findAll({
         attributes: ['id_eje','descripcion_eje']
     });        
-
     res.json(consulta)
-    
-
 });
 
 router.get('/consulta/cate', async(req,res)=>{ 
@@ -49,13 +47,10 @@ router.get('/subcategorias/:id_linea', async (req, res) => {
             [Op.in]: (sequelize.query(`SELECT id_linea FROM linea WHERE id_linea  = ${id_linea}`))
   
           }
-  
         }
   
       }]
-  
     });
-  
     res.json(subcategorias);
   
   });
